@@ -55,8 +55,6 @@ namespace UST_Timetable
 
         public static void Main(string[] args)
         {
-            /*System.Diagnostics.Stopwatch w = new System.Diagnostics.Stopwatch();
-            w.Start();
             foreach (string name in MajorNames)
             {
                 majors.Add(new Major(name));
@@ -113,18 +111,14 @@ namespace UST_Timetable
                             }
                             else
                             {
-                                c.timeSlots.Last().Time += $"\n{time}";
+                                c.timeSlots.Last().Time += $"\r\n{time}";
                             }
                         }
                     }
                 });
             }
-            w.Stop();
-            Console.WriteLine(w.ElapsedMilliseconds);
-            Console.ReadLine();*/
-            // byte[] json = JsonSerializer.SerializeToUtf8Bytes(majors);
-            // File.WriteAllBytes(@"C:\Users\Maximilian\Desktop\ttb.json", json);
-            File.Delete(@"C:\Users\Maximilian\Desktop\Academic Stuff\ttb.json");
+            string json = JsonSerializer.Serialize(majors, new JsonSerializerOptions() { WriteIndented = true });
+            File.WriteAllText($@"{Environment.GetFolderPath(Environment.SpecialFolder.Desktop)}\ttb.json", json);
         }
 
         static string SendRequest(string URL)
